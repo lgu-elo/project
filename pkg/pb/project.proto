@@ -15,9 +15,7 @@ service ProjectService {
 message Project {
     int64 id = 1;
     string name = 2;
-    float cost = 3;
-    string dimension = 4;
-    string type = 5;
+    string description = 3;
 }
 
 message ProjectsList {

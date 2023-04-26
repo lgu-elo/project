@@ -1,9 +1,8 @@
 package project
 
 import (
+	"github.com/lgu-elo/project/internal/project/model"
 	"github.com/pkg/errors"
-
-	"github.com/lgu-elo/projectprojecternal/projectprojectel"
 )
 
 type (

@@ -11,7 +11,7 @@ import (
 	"github.com/lgu-elo/project/internal/config"
 	"github.com/lgu-elo/project/internal/project"
 	"github.com/lgu-elo/project/internal/server"
-	"github.com/lgu-elo/project/pb"
+	"github.com/lgu-elo/project/pkg/pb"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	fxlogrus "github.com/takt-corp/fx-logrus"

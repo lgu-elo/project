@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/lgu-elo/project/internal/project/model"
-	"github.com/lgu-elo/project/pb"
+	"github.com/lgu-elo/project/pkg/pb"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
@@ -38,11 +38,9 @@ func (h *projectHandler) GetAllProjects(c context.Context, _ *pb.Empty) (*pb.Pro
 	var pbProjects pb.ProjectsList
 	for _, project := range projects {
 		pbProjects.Projects = append(pbProjects.Projects, &pb.Project{
-			Id:        int64(project.ID),
-			Name:      project.Name,
-			Cost:      float32(project.Cost),
-			Dimension: project.Dimension,
-			Type:      project.Type,
+			Id:          int64(project.ID),
+			Name:        project.Name,
+			Description: project.Description,
 		})
 	}
 
@@ -56,32 +54,27 @@ func (h *projectHandler) GetProjectById(c context.Context, request *pb.ProjectWi
 	}
 
 	return &pb.Project{
-		Id:        int64(project.ID),
-		Name:      project.Name,
-		Cost:      float32(project.Cost),
-		Dimension: project.Dimension,
-		Type:      project.Type,
+		Id:          int64(project.ID),
+		Name:        project.Name,
+		Description: project.Description,
 	}, nil
 }
 
 func (h *projectHandler) UpdateProject(c context.Context, request *pb.Project) (*pb.Project, error) {
 	project, err := h.service.UpdateProject(&model.Project{
-		ID:        int(request.Id),
-		Name:      request.Name,
-		Cost:      float32(request.Cost),
-		Dimension: request.Dimension,
-		Type:      request.Type,
+		ID:          int(request.Id),
+		Name:        request.Name,
+		Description: request.Description,
 	})
 	if err != nil {
 		return nil, err
 	}
 
 	return &pb.Project{
-		Id:        int64(project.ID),
-		Name:      request.Name,
-		Cost:      float32(request.Cost),
-		Dimension: request.Dimension,
-		Type:      request.Type}, nil
+		Id:          int64(project.ID),
+		Name:        request.Name,
+		Description: request.Description,
+	}, nil
 }
 
 func (h *projectHandler) DeleteProject(c context.Context, project *pb.ProjectWithID) (*pb.Empty, error) {
@@ -94,11 +87,9 @@ func (h *projectHandler) DeleteProject(c context.Context, project *pb.ProjectWit
 
 func (h *projectHandler) CreateProject(c context.Context, project *pb.Project) (*pb.Empty, error) {
 	err := h.service.CreateProject(&model.Project{
-		ID:        int(project.Id),
-		Name:      project.Name,
-		Cost:      float32(project.Cost),
-		Dimension: project.Dimension,
-		Type:      project.Type,
+		ID:          int(project.Id),
+		Name:        project.Name,
+		Description: project.Description,
 	})
 
 	if err != nil {
