@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "./pkg/pb";
+
+package project;
+
+service ProjectService {
+    rpc GetProjectById(ProjectWithID) returns (Project) {}
+    rpc GetAllProjects(Empty) returns (ProjectsList) {}
+    rpc UpdateProject(Project) returns (Project) {}
+    rpc DeleteProject(ProjectWithID) returns (Empty) {}
+    rpc CreateProject(Project) returns (Empty) {}
+}
+
+message Project {
+    int64 id = 1;
+    string name = 2;
+    float cost = 3;
+    string dimension = 4;
+    string type = 5;
+}
+
+message ProjectsList {
+    repeated Project projects = 1;
+}
+
+message ProjectWithID {
+    int64 id = 1;
+}
+
+message Empty {}
